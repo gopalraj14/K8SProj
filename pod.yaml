@@ -1,38 +1,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: html-generator-service
+  name: loadbalancer-svc
 spec:
-  selector:
-    app: html-generator
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
   type: LoadBalancer
-
-
+  selector:
+    app: hello
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
 ---
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: html-generator-deployment
+  name: loadbalancer-pod
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: html-generator
+      app: hello
   template:
     metadata:
       labels:
-        app: html-generator
+        app: hello 
     spec:
       containers:
-      - name: html-generator
-        image: my-html-generator:latest
-        ports:
-        - containerPort: 80
-
+        - name: hello
+          image: dhiv123/new1image:latest
+          imagePullPolicy: Always
 

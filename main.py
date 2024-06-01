@@ -1,4 +1,11 @@
-with open("example.html", "w") as file:
-    file.write(html_content)
+#uvicorn main:app --reload
+from fastapi import FastAPI, Request, Form
+from fastapi.templating import Jinja2Templates
 
-print("HTML file created successfully!")
+app = FastAPI()
+templates = Jinja2Templates(directory="/code")
+
+@app.get("/")
+def form_post(request: Request):
+    return templates.TemplateResponse('form.html', context={'request': request})
+
