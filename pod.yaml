@@ -27,6 +27,6 @@ spec:
     spec:
       containers:
         - name: hello
-          image: dhiv123/new1image:latest
+          image: gopalrajdocker/kubepro1:latest1
           imagePullPolicy: Always
 
